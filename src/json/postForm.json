@@ -1,0 +1,14 @@
+{
+  "forum": {
+    "ui:widget": "hidden"
+  },
+  "person": {
+    "ui:widget": "hidden"
+  },
+  "message": {
+    "ui:widget": "textarea",
+    "ui:options": {
+      "rows": 20
+    }
+  }
+}
