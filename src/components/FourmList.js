@@ -16,15 +16,20 @@ class ForumList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {page: 0, loading: true};
+    this.state = {page: 0, loading: true, error: false};
   }
 
   render() {
+    if (this.state.error === true) {
+      return <h1>Uh oh... this is super broken...</h1>
+    }
     if (this.state.loading === true) {
       return <ReactLoading className={'centered'} type={'bars'} width={'10%'} height={'10%'} color={'darkred'}/>;
     }
-    const forumNames = this.state.document._embedded.forums.map(forum => <tr key={forum._links.self.href}
-                                                                             onClick={() => this.props.history.push('/posts')}>
+    const forumNames = this.state.document._embedded['forums'].map(forum => <tr key={forum._links.self.href}
+                                                                                onClick={() => {
+                                                                                  this.props.history.push('/posts?forum=' + forum._links.self.href.substring(forum._links.self.href.lastIndexOf('/') + 1));
+                                                                                }}>
       <td>{forum.topic}</td>
       <td>{forum.postCount}</td>
     </tr>);
@@ -32,8 +37,8 @@ class ForumList extends Component {
       <table className={'table table-striped table-hover forum-table'}>
         <thead>
         <tr>
-          <td>Topic</td>
-          <td>Number of posts</td>
+          <td><b>Topic</b></td>
+          <td><b>Number of posts</b></td>
         </tr>
         </thead>
         <tbody>{forumNames}</tbody>
@@ -56,7 +61,7 @@ class ForumList extends Component {
       .withTemplateParameters({projection: 'summary'})
       .getResource()
       .result
-      .then(result => this.setState({document: result, loading: false}));
+      .then(result => this.setState({document: result, loading: false})).catch(() => this.setState({error: true}));
   }
 }
 

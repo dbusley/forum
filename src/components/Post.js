@@ -39,7 +39,7 @@ class Post extends Component {
             result['$schema'] = 'http://json-schema.org/draft-07/schema#';
             this.setState({schema: result})
           }))
-      .catch((reject) => console.error(reject));
+      .catch(() => this.setState({error: true}));
   }
 }
 

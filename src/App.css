@@ -18,11 +18,22 @@ body {
 
 .container {
   background-color: white;
+  border-right: solid darkgray 2px;
+  border-left: solid darkgray 2px;
+  padding-bottom: 20px;
 }
 
 .table-div {
   border-radius: 25px;
   border: solid 1px lightgray;
-  margin: 10px;
+  box-shadow: 5px 10px darkgray;
   padding: 20px;
+  margin: 50px;
+}
+
+.post-div {
+  border: solid 1px lightgray;
+  box-shadow: 5px 10px darkgray;
+  padding: 20px;
+  margin: 50px;
 }
